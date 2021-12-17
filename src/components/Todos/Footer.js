@@ -1,7 +1,14 @@
-import { Link } from 'react-router-dom'
+import { Link, useMatch, useResolvedPath } from 'react-router-dom'
 import { useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectTodos, deleteTodos } from '../../Store/todo.slice'
+
+function CustomLink ({ children, to, ...props }) {
+  const resolved = useResolvedPath(to)
+  const match = useMatch({ path: resolved.pathname, end: true })
+
+  return <Link className={match ? 'selected' : ''} to={to} {...props}>{children}</Link>
+}
 
 function Footer() {
   const dispatch = useDispatch()
@@ -30,13 +37,13 @@ function Footer() {
       </span>
       <ul className="filters">
         <li>
-          <Link className="selected" to="/" exact="true">All</Link>
+          <CustomLink to="/" exact="true">All</CustomLink>
         </li>
         <li>
-          <Link to="/active">Active</Link>
+          <CustomLink to="/active">Active</CustomLink>
         </li>
         <li>
-          <Link to="/completed">Completed</Link>
+          <CustomLink to="/completed">Completed</CustomLink>
         </li>
       </ul>
       {
