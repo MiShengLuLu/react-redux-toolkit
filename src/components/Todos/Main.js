@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addTodo, loadTodos, selectTodos } from '../../Store/todo.slice'
+import { loadTodos, selectTodos, updateTodos } from '../../Store/todo.slice'
 import TodoItem from './Item'
 import { useLocation } from 'react-router-dom'
 
@@ -29,12 +29,35 @@ function Main() {
     },
     [todos, location]
   )
+
+  const toggleAllState = useMemo(
+    () => todos.every(t => t.isCompleted),
+    [todos]
+  )
+
+  const toggleAll = (checked) => {
+    let payload = []
+    todos.forEach(t => {
+      payload.push({
+        id: t.cid,
+        changes: { ...t, isCompleted: checked }
+      })
+    })
+    dispatch(updateTodos(payload))
+  }
   
   return (
     <section className="main">
-      <button onClick={() => dispatch(addTodo({title: '测试'}))}>
-        添加任务
-      </button>
+      <span>{toggleAllState}</span>
+        <input
+          id="toggle-all"
+          className="toggle-all"
+          type="checkbox"
+          checked={toggleAllState}
+          data-testid="toggle-all"
+          onChange={(e) => toggleAll(e.target.checked)}
+        />
+        <label htmlFor="toggle-all">Mark all as complete</label>
       <ul className="todo-list">
         {
           filterTodos.map(todo => (

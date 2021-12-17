@@ -53,6 +53,10 @@ const { reducer: TodosReducer, actions } = createSlice({
         }
       })
     },
+    updateTodos: {
+      reducer: todosAdapter.updateMany,
+      prepare: payload => ({ payload })
+    },
     deleteTodo: {
       reducer: todosAdapter.removeOne,
       prepare: todo => ({
@@ -90,5 +94,5 @@ const { reducer: TodosReducer, actions } = createSlice({
 const { selectAll } = todosAdapter.getSelectors()
 export const selectTodos = createSelector(state => state[TODOS_FEATURE_KEY], selectAll)
 
-export const { addTodo, setTodos, deleteTodo, deleteTodos, updateTodo } = actions
+export const { addTodo, setTodos, deleteTodo, deleteTodos, updateTodo, updateTodos } = actions
 export default TodosReducer
