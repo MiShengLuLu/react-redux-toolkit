@@ -8,6 +8,7 @@ const todosAdapter = createEntityAdapter({
 // console.log(todosAdapter.getInitialState())
 
 export const TODOS_FEATURE_KEY = 'todos'
+
 // 异步操作的第一种方式
 // export const loadTodos = createAsyncThunk('todos/loadshTodos', (payload, thunkAPI) => {
 //   axios
@@ -17,6 +18,8 @@ export const TODOS_FEATURE_KEY = 'todos'
 export const loadTodos = createAsyncThunk('todos/loadshTodos', (payload) => 
   axios.get(payload).then(response => response.data)
 )
+
+// export const deleteTodoThunk = createAsyncThunk('todos/delete') 
 
 const { reducer: TodosReducer, actions } = createSlice({
   name: TODOS_FEATURE_KEY,
@@ -40,6 +43,27 @@ const { reducer: TodosReducer, actions } = createSlice({
           }
         }
       }
+    },
+    updateTodo: {
+      reducer: todosAdapter.updateOne,
+      prepare: todo => ({
+        payload: {
+          id: todo.cid,
+          changes: todo
+        }
+      })
+    },
+    deleteTodo: {
+      reducer: todosAdapter.removeOne,
+      prepare: todo => ({
+        payload: todo.cid
+      })
+    },
+    deleteTodos: {
+      reducer: todosAdapter.removeMany,
+      prepare: ids => ({
+        payload: ids
+      })
     },
     // setTodos: (state, action) => {
     //   // action.payload.forEach(todo => state.push(todo))
@@ -66,5 +90,5 @@ const { reducer: TodosReducer, actions } = createSlice({
 const { selectAll } = todosAdapter.getSelectors()
 export const selectTodos = createSelector(state => state[TODOS_FEATURE_KEY], selectAll)
 
-export const { addTodo, setTodos } = actions
+export const { addTodo, setTodos, deleteTodo, deleteTodos, updateTodo } = actions
 export default TodosReducer

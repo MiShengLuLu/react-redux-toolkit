@@ -1,18 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-// import './index.css';
-import App from './components/App';
-import reportWebVitals from './reportWebVitals';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from './App'
+import reportWebVitals from './reportWebVitals'
 import { Provider } from 'react-redux'
 import store from './Store'
 import { Global } from "@emotion/react"
+import { BrowserRouter } from 'react-router-dom'
 import styles from './styles'
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <Global styles={styles} />
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

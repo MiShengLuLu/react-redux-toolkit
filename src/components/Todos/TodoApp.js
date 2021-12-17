@@ -216,7 +216,7 @@ export default styled.section`
     display: inline;
   }
 
-  & .filters li button {
+  & .filters li a {
     color: inherit;
     padding: 0 7px;
     text-decoration: none;
@@ -224,11 +224,11 @@ export default styled.section`
     border-radius: 3px;
   }
 
-  & .filters li button:hover {
+  & .filters li a:hover {
     border-color: rgba(175, 47, 47, 0.1);
   }
 
-  & .filters li button.selected {
+  & .filters li a.selected {
     border-color: rgba(175, 47, 47, 0.2);
   }
 
