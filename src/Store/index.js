@@ -11,5 +11,7 @@ export default configureStore({
    * 配置中间件
    * 需先引入 @reduxjs/toolkit 默认的中间件
    */
-  middleware: [...getDefaultMiddleware(), logger]
+  middleware: process.env.NODE_ENV === 'development'
+    ? [...getDefaultMiddleware(), logger]
+    : [...getDefaultMiddleware()]
 })

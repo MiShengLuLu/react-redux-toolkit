@@ -47,5 +47,7 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "redux-mock-store": "^1.5.4"
+  }
 }

@@ -24,12 +24,13 @@ function TodoItem ({ todo }) {
     e.target.value = todo.title
   }
   return (
-    <li className={classNames({
+    <li data-testid="todo-item" className={classNames({
       completed: todo.isCompleted,
       editing: isEdit
     })}>
       <div className="view">
         <input
+          data-testid="todo-done"
           className="toggle"
           type="checkbox"
           checked={todo.isCompleted}
@@ -46,7 +47,7 @@ function TodoItem ({ todo }) {
             }, 0);
           }}
         >{todo.title}</label>
-        <button className="destroy" onClick={() => dispatch(deleteTodo(todo))} />
+        <button data-testid="destroy" className="destroy" onClick={() => dispatch(deleteTodo(todo))} />
       </div>
       <input
         ref={inputEl}
