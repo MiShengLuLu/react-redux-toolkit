@@ -36,10 +36,11 @@ function TodoItem ({ todo }) {
           checked={todo.isCompleted}
           onChange={() => dispatch(updateTodo({
             ...todo,
-            isCompleted: true
+            isCompleted: !todo.isCompleted
           }))}
         />
         <label
+          data-testid="todo-text"
           onDoubleClick={() => {
             setIsEdit(true)
             setTimeout(() => {
@@ -51,6 +52,7 @@ function TodoItem ({ todo }) {
       </div>
       <input
         ref={inputEl}
+        data-testid="todo-edit"
         className="edit"
         autoFocus
         defaultValue={todo.title}

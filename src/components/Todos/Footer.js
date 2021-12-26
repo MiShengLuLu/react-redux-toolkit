@@ -33,22 +33,22 @@ function Footer() {
   return (
     <footer className="footer">
       <span className="todo-count">
-        <strong>{remainingCount}</strong> item left
+        <strong data-testid="remaining">{remainingCount}</strong> item left
       </span>
       <ul className="filters">
         <li>
-          <CustomLink to="/" exact="true">All</CustomLink>
+          <CustomLink data-testid="link-all" to="/" exact="true">All</CustomLink>
         </li>
         <li>
-          <CustomLink to="/active">Active</CustomLink>
+          <CustomLink data-testid="link-active" to="/active">Active</CustomLink>
         </li>
         <li>
-          <CustomLink to="/completed">Completed</CustomLink>
+          <CustomLink data-testid="link-completed" to="/completed">Completed</CustomLink>
         </li>
       </ul>
       {
         todos.some(t => t.isCompleted)
-          ? <button className="clear-completed" onClick={clearCompletedTodos}>Clear completed</button>
+          ? <button data-testid="clear-completed" className="clear-completed" onClick={clearCompletedTodos}>Clear completed</button>
           : null
       }
       

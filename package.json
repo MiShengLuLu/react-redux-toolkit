@@ -24,7 +24,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --watchAll=false",
-    "test:unit": "react-scripts test",
+    "test:feature": "react-scripts test",
     "coverage": "react-scripts test --coverage",
     "eject": "react-scripts eject",
     "json-server": "json-server --watch ./db.json --port 5000"
